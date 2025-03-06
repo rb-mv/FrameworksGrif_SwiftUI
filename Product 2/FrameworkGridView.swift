@@ -8,6 +8,11 @@
 import SwiftUI
 
 struct FrameworkGridView: View {
+    
+    let column: [GridItem] = [GridItem(.flexible()),
+                              GridItem(.flexible()),
+                              GridItem(.flexible())]
+    
     var body: some View {
         ZStack {
             LinearGradient(colors: [.gray, .black],
@@ -29,14 +34,12 @@ struct FrameworkGridView: View {
                 
                 Spacer()
                 
-                HStack {
+                LazyVGrid(columns: column) {
                     
-                    FrameworkCell(imageName: MockData.frameworks[0].imageName,
-                                  name: MockData.frameworks[0].name)
-                    FrameworkCell(imageName: MockData.frameworks[1].imageName,
-                                  name: MockData.frameworks[1].name)
-                    FrameworkCell(imageName: MockData.frameworks[2].imageName,
-                                  name: MockData.frameworks[2].name)
+                    ForEach(MockData.frameworks) { framework in
+                        FrameworkCell(framework: framework)
+                    }
+                    
                 }
                 
                 Spacer()
@@ -52,16 +55,15 @@ struct FrameworkGridView: View {
 
 struct FrameworkCell: View {
     
-    var imageName: String
-    var name: String
+    var framework: Framework
     
     var body: some View {
         VStack(alignment: .center){
-            Image(imageName)
+            Image(framework.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 90, height: 90)
-            Text(name)
+            Text(framework.name)
                 .font(.title2)
                 .fontWeight(.semibold)
                 .scaledToFit()
