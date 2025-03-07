@@ -14,42 +14,23 @@ struct FrameworkGridView: View {
                               GridItem(.flexible())]
     
     var body: some View {
-        ZStack {
-            LinearGradient(colors: [.gray, .black],
-                           startPoint: .topLeading,
-                           endPoint: .bottomTrailing)
-            .ignoresSafeArea(.all)
-            VStack {
-                HStack(alignment: .bottom){
-                    Image("apple")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 50, height: 50)
-                    Text("Frameworks")
-                        .foregroundColor(Color.white)
-                        .font(.system(size: 30, weight: .heavy))
-                }
-                .padding(.top, 40)
-                .padding(.trailing, 100)
-                
-                Spacer()
-                
+        NavigationView {
+            ScrollView {
                 LazyVGrid(columns: column) {
-                    
                     ForEach(MockData.frameworks) { framework in
                         FrameworkCell(framework: framework)
                     }
-                    
                 }
-                
-                Spacer()
             }
+            .navigationTitle("🍎 Framework")
+            .background(Gradient(colors: [.black, .gray]))
         }
     }
 }
 
 #Preview {
     FrameworkGridView()
+        .preferredColorScheme(.dark)
 }
 
 
@@ -70,6 +51,6 @@ struct FrameworkCell: View {
                 .minimumScaleFactor(0.6)
                 .foregroundColor(Color.white)
         }
-        .padding(10)
+        .padding()
     }
 }
