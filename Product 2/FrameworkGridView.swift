@@ -23,7 +23,7 @@ struct FrameworkGridView: View {
                 }
             }
             .navigationTitle("🍎 Framework")
-            .background(Gradient(colors: [.black, .gray]))
+            .background(LinearGradient(colors: [.gray, .black], startPoint: .topLeading, endPoint: .bottomTrailing))
         }
     }
 }
@@ -49,7 +49,6 @@ struct FrameworkCell: View {
                 .fontWeight(.semibold)
                 .scaledToFit()
                 .minimumScaleFactor(0.6)
-                .foregroundColor(Color.white)
         }
         .padding()
     }
