@@ -12,6 +12,7 @@ struct FrameworkDetailView: View {
     var framework: Framework
     
     @Binding var isShowingDetailView: Bool
+    @State var isShowingSafariView = false
     
     var body: some View {
         
@@ -40,11 +41,14 @@ struct FrameworkDetailView: View {
             Spacer()
             
             Button {
-                
+                isShowingSafariView = true
             }   label: {
                 AFButton(title: "Learn More")
             }
             .padding()
+            .sheet(isPresented: $isShowingSafariView) {
+                SafariView(url: URL(string: framework.urlString) ?? URL(string: "www.apple.com")!)
+            }
         }
         .background(LinearGradient(colors: [.indigo, .clear, .black], startPoint: .topLeading, endPoint: .bottomTrailing))
     }
