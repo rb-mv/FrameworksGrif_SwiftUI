@@ -16,7 +16,7 @@ struct AFButton: View {
             .font(.title2)
             .fontWeight(.semibold)
             .frame(width: 250, height: 50)
-            .background(LinearGradient(colors: [.red, .orange], startPoint: .topLeading, endPoint: .bottomTrailing))
+            .background(RadialGradient(colors: [.indigo, .black], center: .top, startRadius: 0, endRadius: 150))
             .cornerRadius(14)
             .foregroundColor(Color.white)
     }

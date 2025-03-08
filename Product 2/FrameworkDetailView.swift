@@ -15,38 +15,40 @@ struct FrameworkDetailView: View {
     
     var body: some View {
         
-        HStack {
+        VStack {
+            HStack {
+                Spacer()
+                
+                Button {
+                    isShowingDetailView = false
+                }   label: {
+                    Image(systemName: "xmark")
+                        .foregroundColor(Color(.label))
+                        .imageScale(.large)
+                        .frame(width: 44, height: 44)
+                }
+                .padding()
+            }
+            
+            Spacer()
+            
+            FrameworkCell(framework: framework)
+            Text(framework.description)
+                .font(.body)
+                .padding()
+            
             Spacer()
             
             Button {
-                isShowingDetailView = false
+                
             }   label: {
-                Image(systemName: "xmark")
-                    .foregroundColor(Color(.label))
-                    .imageScale(.large)
-                    .frame(width: 44, height: 44)
+                AFButton(title: "Learn More")
             }
             .padding()
         }
-        
-        Spacer()
-        
-        FrameworkCell(framework: framework)
-        Text(framework.description)
-            .font(.body)
-            .padding()
-        
-        Spacer()
-        
-        Button {
-            
-        }   label: {
-            AFButton(title: "Learn More")
-        }
-        .padding()
+        .background(LinearGradient(colors: [.indigo, .clear, .black], startPoint: .topLeading, endPoint: .bottomTrailing))
     }
 }
-
 #Preview {
     FrameworkDetailView(framework: MockData.sampleFramework, isShowingDetailView: .constant(false))
         .preferredColorScheme(.dark)
