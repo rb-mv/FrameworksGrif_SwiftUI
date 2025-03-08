@@ -52,7 +52,7 @@ struct FrameworkCell: View {
             Image(framework.imageName)
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(width: 90, height: 90)
+                .frame(width: 85, height: 85)
             Text(framework.name)
                 .font(.title2)
                 .fontWeight(.semibold)
