@@ -37,5 +37,3 @@ struct FrameworkGridView: View {
     FrameworkGridView()
         .preferredColorScheme(.dark)
 }
-
-
