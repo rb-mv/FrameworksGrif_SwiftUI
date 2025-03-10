@@ -11,16 +11,12 @@ struct FrameworkGridView: View {
     
     @StateObject var viewModel = FrameworkGridViewModel()
     
-    let column: [GridItem] = [GridItem(.flexible()),
-                              GridItem(.flexible()),
-                              GridItem(.flexible())]
-    
     var body: some View {
         NavigationView {
             ScrollView {
-                LazyVGrid(columns: column) {
+                LazyVGrid(columns: viewModel.column) {
                     ForEach(MockData.frameworks) { framework in
-                        FrameworkCell(framework: framework)
+                        FrameworkCellView(framework: framework)
                             .onTapGesture {
                                 viewModel.selectedFramework = framework
                             }
@@ -28,7 +24,7 @@ struct FrameworkGridView: View {
                 }
             }
             .navigationTitle("🍎 Framework")
-            .background(LinearGradient(colors: [.indigo, .clear, .black], startPoint: .topLeading, endPoint: .bottomTrailing))
+            .background(LinearGradient(colors: [.indigo, .clear], startPoint: .topLeading, endPoint: .bottomTrailing))
             .sheet(isPresented: $viewModel.isShowingDetailView) {
                 FrameworkDetailView(framework: viewModel.selectedFramework ?? MockData.sampleFramework,
                                     isShowingDetailView: $viewModel.isShowingDetailView)
@@ -43,22 +39,3 @@ struct FrameworkGridView: View {
 }
 
 
-struct FrameworkCell: View {
-    
-    var framework: Framework
-    
-    var body: some View {
-        VStack(alignment: .center){
-            Image(framework.imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 85, height: 85)
-            Text(framework.name)
-                .font(.title2)
-                .fontWeight(.semibold)
-                .scaledToFit()
-                .minimumScaleFactor(0.6)
-        }
-        .padding()
-    }
-}
